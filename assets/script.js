@@ -21,6 +21,10 @@ const menuButton = document.querySelector(".menu-toggle");
 const siteMenu = document.querySelector(".site-menu");
 const menuLinks = [...document.querySelectorAll(".site-menu a")];
 
+function updateScrollState() {
+  document.body.classList.toggle("scrolled", window.scrollY > window.innerHeight * 0.2);
+}
+
 function setMenu(open) {
   document.body.classList.toggle("menu-open", open);
   menuButton?.setAttribute("aria-expanded", String(open));
@@ -40,6 +44,9 @@ document.addEventListener("keydown", (event) => {
     setMenu(false);
   }
 });
+
+window.addEventListener("scroll", updateScrollState, { passive: true });
+updateScrollState();
 
 let idleTheme = themes.indexOf(body.dataset.theme);
 window.setInterval(() => {
